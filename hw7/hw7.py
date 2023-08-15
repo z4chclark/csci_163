@@ -1,4 +1,6 @@
 import pdb
+import math
+import random
 
 def problem1(a, b):
     # Base cases
@@ -35,3 +37,40 @@ a = 2101
 b = 1130
 print(a*b)
 print(problem1(a, b))
+
+
+def problem2(P):
+    
+    n = len(P)
+    if n == 0:
+        return 9999
+    if n == 1:
+        return 9999
+    
+    mid = (n-1)//2
+    median = P[mid]
+    Center = []
+
+    delta = min(problem2(P[:mid]), problem2(P[mid+1:]))
+
+    P.sort(key=lambda y: y[1])
+    
+    for i in range(0, n):
+        if abs(P[i][0] - median[0]) <= delta:
+            Center.append(P[i])
+
+    for i in range(0, len(Center)):
+        for j in range(i+1, min(i+7, len(Center))):
+            delta = min(delta, math.sqrt((Center[i][0]-Center[j][0])**2 + (Center[i][1]-Center[j][1])**2))
+
+    return delta
+
+P = []
+for i in range(0,5):
+    P.append((random.randint(0,9), random.randint(0,9)))
+
+P.sort(key=lambda x: x[0])
+print(P)
+print(problem2(P)) 
+
+
