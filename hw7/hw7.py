@@ -42,10 +42,8 @@ print(problem1(a, b))
 def problem2(P):
     
     n = len(P)
-    if n == 0:
-        return 9999
-    if n == 1:
-        return 9999
+    if n == 0 or n == 1:
+        return 9999999
     
     mid = (n-1)//2
     median = P[mid]
